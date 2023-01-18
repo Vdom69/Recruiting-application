@@ -1,0 +1,18 @@
+
+button {
+  height: 40px;
+  border-radius: 4px;
+  margin-top: 10px;
+  font-size: 15px;
+  text-align: center;
+  user-select: none;
+  font-weight: 600;
+  border-radius: 4px;
+  color: #ffffff;
+  border: 1px solid #14877c;
+  background-color: #14877c;
+  cursor: pointer;
+  margin: 0px 15px;
+}
+
+
