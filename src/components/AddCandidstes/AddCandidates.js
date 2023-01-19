@@ -1,6 +1,6 @@
-import React, { useState } from "react";
+import React, {useState} from "react";
 
-export const AddCandidstes = ({ name, email, number, id, onEdit, onDelete }) => {
+export const AddCandidates = ({ name, email, number, id, onEdit, onDelete }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const handleEdit = () => {
@@ -23,8 +23,8 @@ export const AddCandidstes = ({ name, email, number, id, onEdit, onDelete }) => 
         <form onSubmit={handleOnEditSubmit}>
           <div class="w-full"></div>
           <input class="text-blue-800 outline-none w-60 placeholder-blue-800 text-blue-800" placeholder="Name" name="name" defaultValue={name} />
-          <input class="text-blue-800 outline-none w-60 placeholder-blue-800 text-blue-800"placeholder="Email" name="email" defaultValue={email}/>
-          <input class="text-blue-800 outline-none w-60 placeholder-blue-800 text-blue-800"placeholder="Number" name="number" defaultValue={number} />
+          <input class="text-blue-800 outline-none w-60 placeholder-blue-800 text-blue-800" placeholder="Email" name="email" defaultValue={email}/>
+          <input class="text-blue-800 outline-none w-60 placeholder-blue-800 text-blue-800" placeholder="Number" name="number" defaultValue={number} />
           <button onSubmit={handleOnEditSubmit}><i class="bi bi-check-square-fill text-blue-800 text-3xl cursor-pointer"></i></button>
         </form>
       ) : (
@@ -38,10 +38,10 @@ export const AddCandidstes = ({ name, email, number, id, onEdit, onDelete }) => 
             <button onClick={handleEdit}><i class="bi bi-pencil-square text-3xl"></i></button>
             <button onClick={handleDelete}><i class="bi bi-person-x-fill text-red-800 text-3xl ml-5"></i></button>
           </div>
-        
+
         </div>
       )}
     </div>
   );
 };
-export default AddCandidstes;
+export default AddCandidates;

@@ -1,5 +1,4 @@
 import { useState } from 'react'
-import PropTypes from 'prop-types';
 import styles from './RusumeCreate.module.css';
 const RusumeCreate = ({ addTask }) => {
   const [userInput, setUserInput] = useState('')
@@ -116,7 +115,7 @@ return(
      <div class="info-left w-full text-left pl-8 text-blue-800">
       <div class="w-full"></div>
     <div class="w-96">
-    <h2>Achivments</h2>
+    <h2>Achievements</h2>
        <textarea class="border-2 border-blue-800 w-96 h-20 outline-none text-2xl p-3 pt-4"></textarea>
     </div>
     <div class="w-96 mt-3">
@@ -135,7 +134,7 @@ return(
      
      <div class="info-right w-full pl-8 text-blue-800 text-left">
        <div class="w-60 mx-auto">
-       <h2>Peronal detalic</h2>
+       <h2>Personal details</h2>
        <ul class="pl-3">
          <li class="text-blue-800 font-bold">Data of birth</li>
 <div class="relative">
@@ -167,7 +166,7 @@ return(
             />        
             <button className='w-12 h-8 bg-blue-300 text-blue-800 text-2xl px-1'><i class="bi bi-clipboard-check-fill"></i></button>
         </form>
-         <li class="text-blue-800 font-bold">Linkedln</li>
+         <li class="text-blue-800 font-bold">LinkedIn</li>
          <form onSubmit={handleSubmit} className="d-flex">
             <input class="border-2 border-blue-800 placeholder-blue-800 px-2 outline-none"
                 value={userInput}

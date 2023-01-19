@@ -4,7 +4,7 @@ import Home from './components/Home/Home';
 import Candidates from './components/Candidates/Candidates';
 import CandidatesGrid from './components/CandidatesGrid/CandidatesGrid';
 import UsersPage from './components/UsersPage/UsersPage';
-import AddCandidstes from './components/AddCandidstes/AddCandidstes';
+import AddCandidates from './components/AddCandidstes/AddCandidates';
 import AddUsers from './components/AddUsers/AddUsers';
 import FetchDataUsers from './components/FetchDataUsers/FetchDataUsers';
 import List from './components/List/List';
@@ -24,7 +24,7 @@ function App() {
                     <Route element={<CandidatesGrid/>} path="/candidatesgrid"/>
                     <Route element={<UsersPage/>} path="/products/:id"/>
                     <Route element={<RusumeCreate/>} path="/rusume" exact/>
-                    <Route element={<AddCandidstes />} path="/addCandidstes" exact/>
+                    <Route element={<AddCandidates />} path="/addCandidstes" exact/>
                     <Route element={<AddUsers />} path="/addUsers" exact/>
                     <Route element={<List />} path="/list" exact/>
                     <Route element={<FetchDataUsers/>} path="/fetchDataUsers" exact/>

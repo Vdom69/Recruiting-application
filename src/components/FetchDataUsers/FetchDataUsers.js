@@ -1,8 +1,5 @@
-
-import PropTypes from 'prop-types';
-import styles from './FetchDataUsers.module.css';
 import React, { useEffect, useState } from "react";
-import AddCandidstes from "../AddCandidstes/AddCandidstes";
+import AddCandidates from "../AddCandidstes/AddCandidates";
 import AddUsers from "../AddUsers/AddUsers";
 const FetchDataUsers = () => {
   const [users, setUsers] = useState([]);
@@ -31,9 +28,7 @@ const FetchDataUsers = () => {
       }
     })
       .then((response) => {
-        if (response.status !== 201) {
-          return;
-        } else {
+        if (response.status === 201) {
           return response.json();
         }
       })
@@ -56,9 +51,7 @@ const FetchDataUsers = () => {
       }
     })
       .then((response) => {
-        if (response.status !== 200) {
-          return;
-        } else {
+        if (response.status === 200) {
           return response.json();
         }
       })
@@ -84,13 +77,11 @@ const FetchDataUsers = () => {
       method: "DELETE"
     })
       .then((response) => {
-        if (response.status !== 200) {
-          return;
-        } else {
+        if (response.status === 200) {
           setUsers(
-            users.filter((user) => {
-              return user.id !== id;
-            })
+              users.filter((user) => {
+                return user.id !== id;
+              })
           );
         }
       })
@@ -101,7 +92,7 @@ const FetchDataUsers = () => {
     <div className="mx-32 py-10">
       <AddUsers onAdd={onAdd} />
       {users.map((user) => (
-        <AddCandidstes
+        <AddCandidates
           id={user.id}
           key={user.id}
           name={user.name}
