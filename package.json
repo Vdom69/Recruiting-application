@@ -15,6 +15,7 @@
     "flowbite-datepicker": "^1.2.2",
     "flowbite-react": "^0.3.7",
     "html-webpack-plugin": "^5.5.0",
+    "idb": "^7.1.1",
     "rc-pagination": "^3.2.0",
     "react": "^18.2.0",
     "react-bootstrap": "^2.7.0",
@@ -54,9 +55,9 @@
     ]
   },
   "devDependencies": {
+    "@types/chrome": "^0.0.203",
     "autoprefixer": "^10.4.13",
     "postcss": "^8.4.21",
-    "tailwindcss": "^3.2.4",
-    "@types/chrome": "^0.0.203"
+    "tailwindcss": "^3.2.4"
   }
 }
