@@ -1,4 +1,4 @@
-const candidatesKey = "candidates";
+import {BasicRepository} from "./BasicRepository";
 
 /**
  * Why was selected "IndexedDB (idb)":
@@ -8,20 +8,15 @@ const candidatesKey = "candidates";
  * Other info about it:
  * https://developer.chrome.com/articles/file-system-access/
  */
-class CandidatesRepository {
+class CandidatesRepository extends BasicRepository {
 
-    findCandidate(id) {
-
-    }
-
-    findAllCandidates() {
-
-    }
-
-    saveCandidate(candidate) {
-
+    constructor() {
+        super("candidates");
+        this.tableName = "candidates"
     }
 
 }
 
-export default CandidatesRepository
+const candidatesRepository = new CandidatesRepository()
+
+export default candidatesRepository

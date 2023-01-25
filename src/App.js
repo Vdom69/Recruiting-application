@@ -11,7 +11,6 @@ import List from './components/List/List';
 import Settings from './components/Settings/Settings';
 import RusumeCreate from './components/RusumeCreate/RusumeCreate';
 import { BrowserRouter as Router, Routes, Route} from "react-router-dom";
-import Table from "./table";
 function App() {
   return (
     <div className="App">

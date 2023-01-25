@@ -1,5 +1,10 @@
 # Recruiting application
 
+## Tutorials
+
+* [IndexedDB](https://jsstore.net/tutorial/get-started/)
+* [eslint](https://eslint.org/)
+
 ## Scripts
 
 ### `npm start`
