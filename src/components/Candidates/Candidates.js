@@ -1,48 +1,54 @@
-import React, { useState,useEffect } from 'react';
+import React, {useState, useEffect} from 'react';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import cloneDeep from "lodash/cloneDeep";
-import throttle from "lodash/throttle";
 import Pagination from "rc-pagination";
 import {Link} from "react-router-dom";
-import { allData } from "../../constants";
+import candidatesRepository from "../../storage/CandidatesRepository";
+import {debounce} from "react-instantsearch-dom/dist/cjs/lib/debounce";
 const Candidates = () => {
-    // duplicate! The same at the file "table.js"
-  const countPerPage = 10;
-  const [value, setValue] = React.useState("");
-  const [currentPage, setCurrentPage] = React.useState(1);
-  const [collection, setCollection] = React.useState(
-    cloneDeep(allData.slice(0, countPerPage))
-  );
-  const searchData = React.useRef(
-    throttle(val => {
-      const query = val.toLowerCase();
-      setCurrentPage(1);
-      const data = cloneDeep(
-        allData
-          .filter(item => item.name.toLowerCase().indexOf(query) > -1)
-          .slice(0, countPerPage)
-      );
-      setCollection(data);
-    }, 400)
-  );
-  React.useEffect(() => {
-    if (!value) {
-      updatePage(1);
-    } else {
-      searchData.current(value);
-    }
-  }, [value]);
+    const [state, setState] = useState({
+        currentPage: 0,
+        search: "",
+    });
+    const [candidatesPage, setCandidatesPage] = useState(null);
 
-  const updatePage = p => {
-    setCurrentPage(p);
-    const to = countPerPage * p;
-    const from = to - countPerPage;
-    setCollection(cloneDeep(allData.slice(from, to)));
-  };
-  const tableData = () => {
-    return collection.map((allData) => allData);
-  };
-  // end of duplicate
+    const handleSearchChange = e => {
+        setState({
+            search: e.target.value,
+            currentPage: 0
+        })
+    };
+    const debouncedSearchChange = debounce(handleSearchChange, 150);
+
+    const handlePageChange = page => {
+        setState({
+            ...state,
+            currentPage: page
+        })
+    };
+
+    const buildSearchRequest = search => !!search ? {
+        name: {
+            like: `%${search}%`
+        }
+    } : undefined;
+
+    useEffect(() => {
+        const fetchCandidatesData = async () => {
+            let pagination;
+            const whereCondition = buildSearchRequest(state.search);
+
+            if (candidatesPage) {
+                candidatesPage.currentPage = state.currentPage
+                pagination = await candidatesRepository.findAllBy(candidatesPage, whereCondition)
+            } else {
+                pagination = await candidatesRepository.findAllByFirstPage(whereCondition)
+            }
+            setCandidatesPage(pagination);
+        }
+
+        fetchCandidatesData().catch(console.error);
+    }, [state])
+
     return(
       <div className='py-10'><h1 class="text-blue-800">Candidates</h1>
         <div class="w-full mx-auto">
@@ -53,7 +59,7 @@ const Candidates = () => {
              <div className='w-full h-10 mx-auto '>
               <div class='w-60 h-20  p-4 ml-32 d-flex'>
                 <i class="bi bi-search text-2xl text-blue-800 px-3"></i>
-                 <input className='outline-none font-bold border-b border-blue-800 text-blue-800' value={value} onChange={e => setValue(e.target.value)}/>
+                 <input className='outline-none font-bold border-b border-blue-800 text-blue-800' onChange={debouncedSearchChange}/>
               </div>
             </div>
         </div>
@@ -71,15 +77,21 @@ const Candidates = () => {
                   </tr>
               </thead>
             </table>
-                {tableData().map(product => {
+                {candidatesPage?.data.map(product => {
                     return (
                       <div class="w-full">
-                        <div class="border-2 border-blue-600 rounded-xl shadow-lg py-4 px-3 m-3 mx-auto"key={product.id}>
+                        <div class="border-2 border-blue-600 rounded-xl shadow-lg py-4 px-3 m-3 mx-auto" key={product?.id}>
                           <table class="table-auto">
                             <tbody>
                               <tr>
                                 <td> <input id="default-checkbox" type="checkbox" value="" class="w-10 h-10 border-2 text-blue-800 bg-blue-800 border-gray-800 rounded accent-blue-800"/></td>
-                                <td><img class="w-14 h-14 mx-auto object-cover border-2 border-blue-600 rounded-xl" src={product.image}/></td>
+                                <td>
+                                    {
+                                        product.image
+                                            ? <img className="w-14 h-14 mx-auto object-cover border-2 border-blue-600 rounded-xl" src={product.image} alt="Not found"/>
+                                            : <img className="w-14 h-14 mx-auto object-cover border-2 border-blue-600 rounded-xl" src="https://via.placeholder.com/48" alt="Not found"/>
+                                    }
+                                </td>
                                 <td><h1 class="text-center text-blue-800 px-8 text-lg font-bold">{product.name}</h1></td>
                                 <td><p class="text-left text-blue-800 text-lg font-bold"><i class="bi bi-briefcase-fill"></i> {product.job}-developer</p></td>
                                 <td><div className='flex justify-between px-14'>
@@ -92,22 +104,25 @@ const Candidates = () => {
                                   <p class="text-left text-blue-800 text-lg">#{product.status}</p>
                                   <p class="text-left text-blue-800 text-lg">#{product.develop}</p>
                                   </div></td>
-                              </tr> 
+                              </tr>
                             </tbody>
                           </table>
                         </div>
                     </div>
                  )})}
                    <div className="text-xl py-10">
-                    <Pagination
-                      pageSize={countPerPage}
-                      onChange={updatePage}
-                      current={currentPage}
-                      total={allData.length}
-                    />
+                       {
+                           candidatesPage &&
+                           <Pagination
+                               pageSize={candidatesPage.pageSize}
+                               onChange={handlePageChange}
+                               current={candidatesPage.currentPage}
+                               total={candidatesPage.totalCount}
+                           />
+                       }
                   </div>
-              </div>    
-         </div>            
+              </div>
+         </div>
     </div>
 </div>
     )
