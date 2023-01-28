@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import users from "../../candidates/users.json";
-import { Link } from "react-router-dom";
 
 
 const UsersPage = () => {
@@ -22,11 +21,11 @@ const UsersPage = () => {
         return (
         <div className="container text-center mt-3 py-20">
            <div class="w-full ml-20">
-            <h1 class="text-blue-800">Candidat</h1>
+            <h1 class="text-blue-800">Candidate</h1>
           <div class="mx-auto w-full">
           <div class="flex justify-center">
                     <div className='w-60 h-44 mt-5 ml-20'>
-                        <img className="img w-60 h-48 object-cover"src={product.image}/>
+                        <img className="img w-60 h-48 object-cover" src={product.image}/>
                     </div>
                     <div className='w-full text-left mr-40 text-2xl mt-5 bg-blue-300 text-blue-800'>
                        <div>
@@ -39,7 +38,7 @@ const UsersPage = () => {
             </div>
             <div class="flex justify-between mt-5 mx-5">
               <div class="info-left w-full text-left pl-8 text-blue-800">
-                <h2>Achivments</h2>
+                <h2>Achievements</h2>
                 <ul>
                   <li>{product.achivements}</li>
                 </ul><hr/>
@@ -61,7 +60,7 @@ const UsersPage = () => {
               
               <div class="info-right w-full pl-8 text-blue-800 text-left">
                 <div class="w-60 mx-auto">
-                <h2>Peronal detalic</h2>
+                <h2>Personal details</h2>
                 <ul class="pl-3">
                   <li class="text-blue-300">Data of birth</li>{product.age} {product.mounth}
                   <li class="text-blue-300">Gender</li>{product.gender}

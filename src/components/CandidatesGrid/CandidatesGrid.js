@@ -61,8 +61,8 @@ const CandidatesGrid = () => {
                 {tableData().map(product => {
                     return (
                     <div class="col-sm-8 mt-2">
-                        <div class="w-72 border-2 border-blue-600  rounded-3xl shadow-lg py-8  mx-auto"key={product.id}>
-                            <img class="w-24 h-24 mx-auto object-cover border-2 border-blue-600 rounded-full"src={product.image}/>
+                        <div class="w-72 border-2 border-blue-600  rounded-3xl shadow-lg py-8  mx-auto" key={product.id}>
+                            <img class="w-24 h-24 mx-auto object-cover border-2 border-blue-600 rounded-full" src={product.image}/>
                             <h1 class="text-center text-blue-600 mt-3 text-2xl font-bold">{product.name}</h1>
                             <div className='w-60 mx-auto mt-3'>
                             <div className='flex justify-between px-5 -ml-10'>

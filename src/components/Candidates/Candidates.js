@@ -6,6 +6,7 @@ import Pagination from "rc-pagination";
 import {Link} from "react-router-dom";
 import { allData } from "../../constants";
 const Candidates = () => {
+    // duplicate! The same at the file "table.js"
   const countPerPage = 10;
   const [value, setValue] = React.useState("");
   const [currentPage, setCurrentPage] = React.useState(1);
@@ -41,6 +42,7 @@ const Candidates = () => {
   const tableData = () => {
     return collection.map((allData) => allData);
   };
+  // end of duplicate
     return(
       <div className='py-10'><h1 class="text-blue-800">Candidates</h1>
         <div class="w-full mx-auto">
@@ -77,7 +79,7 @@ const Candidates = () => {
                             <tbody>
                               <tr>
                                 <td> <input id="default-checkbox" type="checkbox" value="" class="w-10 h-10 border-2 text-blue-800 bg-blue-800 border-gray-800 rounded accent-blue-800"/></td>
-                                <td><img class="w-14 h-14 mx-auto object-cover border-2 border-blue-600 rounded-xl"src={product.image}/></td>
+                                <td><img class="w-14 h-14 mx-auto object-cover border-2 border-blue-600 rounded-xl" src={product.image}/></td>
                                 <td><h1 class="text-center text-blue-800 px-8 text-lg font-bold">{product.name}</h1></td>
                                 <td><p class="text-left text-blue-800 text-lg font-bold"><i class="bi bi-briefcase-fill"></i> {product.job}-developer</p></td>
                                 <td><div className='flex justify-between px-14'>
