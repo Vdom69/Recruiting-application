@@ -37,19 +37,7 @@ export class BasicRepository {
      * @returns {Promise<Pagination>}
      */
     async findAllByFirstPage(where?) {
-        const count = (await this.count(where))
-        const pagination = Pagination.firstPage(count)
-        const {pageNumber = 0, pageSize = 10} = pagination;
-        return this.connection.select({
-            from: this.tableName,
-            limit: pageSize,
-            skip: (pageNumber + 1) * pageSize,
-            where: where
-        }).then(data => {
-            const result = Object.assign(new Pagination(), pagination)
-            result.data = data
-            return result
-        })
+        return this.findAllBy(Pagination.firstPage())
     }
 
     /**
@@ -57,12 +45,14 @@ export class BasicRepository {
      * @param {Object} where
      * @returns {Promise<Pagination>}
      */
-    findAllBy(pagination, where?) {
-        const {pageNumber = 0, pageSize = 10} = pagination;
+    async findAllBy(pagination, where?) {
+        const totalCount = (await this.count(where))
+        const {currentPage = 0, pageSize = 10} = pagination;
+        pagination.totalCount = totalCount
         return this.connection.select({
             from: this.tableName,
             limit: pageSize,
-            skip: (pageNumber + 1) * pageSize,
+            skip: (currentPage - 1) <= 0 ? 0 : (currentPage - 1) * pageSize,
             where: where
         }).then(data => {
             const result = Object.assign(new Pagination(), pagination)

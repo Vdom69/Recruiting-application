@@ -1,12 +1,14 @@
 import React from "react";
+import candidatesRepository from "../../storage/CandidatesRepository";
 
-export const AddUsers = ({ onAdd }) => {
+export const AddUsers = () => {
   const handleOnSubmit = (evt) => {
-    evt.preventDefault();
-    onAdd(evt.target.name.value, evt.target.email.value, evt.target.number.value);
-    evt.target.name.value = "";
-    evt.target.email.value = "";
-    evt.target.number.value = "";
+      evt.preventDefault();
+      candidatesRepository.save({
+          name: evt.target.name.value,
+          email: evt.target.email.value,
+          number: evt.target.number.value
+      }).then(() => {})
   };
 
   return (

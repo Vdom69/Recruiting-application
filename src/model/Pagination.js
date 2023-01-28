@@ -1,17 +1,24 @@
 class Pagination {
-    pageNumber = 0;
+    currentPage = 0;
     pageSize;
-    size; // count of all elements in this list
+    totalCount; // count of all elements in this list
     data;
 
     hasNextPage() {
-        return this.size > ((this.pageNumber + 1) * this.pageSize)
+        return this.totalCount > ((this.currentPage + 1) * this.pageSize)
     }
 
-    static firstPage(size, pageSize = 10) {
+    static firstPage(pageSize = 10) {
         const pagination = new Pagination()
-        pagination.size = size
-        pagination.pageNumber = 0
+        pagination.currentPage = 0
+        pagination.pageSize = pageSize
+        return pagination
+    }
+
+    static page(page, totalCount, pageSize = 10) {
+        const pagination = new Pagination()
+        pagination.totalCount = totalCount
+        pagination.currentPage = 0
         pagination.pageSize = pageSize
         return pagination
     }
