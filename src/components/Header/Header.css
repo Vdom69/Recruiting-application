@@ -1,0 +1,78 @@
+#header {
+  position: fixed;
+  width: 230px;
+}
+#header .pro-sidebar {
+  height: 100vh;
+  margin-top: 0px;
+}
+#header .closemenu {
+  position: absolute;
+  right: 0;
+  z-index: 9999;
+  line-height: 20px;
+  border-radius: 50%;
+  font-weight: bold;
+  font-size: 29px;
+  top: 45px;
+  cursor: pointer;
+  margin: 0px 45px 60px;
+}
+#header .pro-sidebar {
+  width: 100%;
+  min-width: 100%;
+}
+#header .pro-sidebar.collapsed {
+  width: 110px;
+  min-width: 80px;
+}
+#header .pro-sidebar-inner {
+  background-color: white;
+}
+#header .pro-sidebar-inner .pro-sidebar-layout {
+  overflow-y: hidden;
+}
+#header .pro-sidebar-inner .pro-sidebar-layout .logotext p {
+  font-size: 20px;
+  padding: 0 20px;
+  font-weight: bold;
+}
+#header .pro-sidebar-inner .pro-sidebar-layout ul {
+  padding: 0 5px;
+}
+#header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item {
+  margin: 20px 0px;
+  font-weight: bold; 
+}
+#header .pro-sidebar-inner .pro-sidebar-layout ul .pro-inner-item .pro-icon-wrapper {
+  background-color: #fbf4cd;
+  border-radius: 3px;
+}
+#header .logo {
+  font-size: 20px;
+}
+
+@media only screen and (max-width: 720px) {
+  html {
+    overflow: hidden;
+  }
+}
+
+
+#header ul li a:hover::before {
+  transform: scale(1.1);
+  box-shadow: 0 0 15px #fff;
+  transition: .5s;
+  color: #92c5fd;
+  text-shadow: 0 0 5px #b5dfff;
+  
+}
+.hover-with-shadow:hover {
+  box-shadow: 0 0 35px #dcebff;
+  transition: .10s;
+  color: #92c5fd;
+  text-shadow: 0 0 5px #92c5fd; 
+  border: 1px solid #fff; 
+  height:100px;
+}
+

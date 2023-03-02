@@ -4,6 +4,10 @@ const Home = () => {
   
     return(
     <div className={styles.Home}>
+        <div class="flex justify-between space-x-44">
+
+     </div>
+     <div>edf</div>
      
       </div>
     )
