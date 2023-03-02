@@ -1,25 +1,31 @@
 import React, { useState, useEffect } from 'react';
 import { useParams } from 'react-router-dom';
-import users from "../../candidates/users.json";
-
+import candidatesRepository from "../../storage/CandidatesRepository";
 
 const UsersPage = () => {
-  let { id } = useParams();
 
-    const [product, setProduct] = useState('');
+const [candidatesPage, setCandidatesPage] = useState();
 
-    useEffect(() => {
-        getProduct();
-    }, [id])
 
-    const getProduct = () => {
-        const selectProduct = users.productListUsers.find(item => +item.id === +id);
-        console.log('selectProduct', selectProduct);
-        setProduct(selectProduct);
-    };
 
-        return (
+useEffect(() => {
+    const fetchCandidatesData = async () => {
+   
+      const candidatesPage = await fetch(candidatesRepository);
+         return await setCandidatesPage(candidatesPage)
+    }
+
+    fetchCandidatesData().catch(console.error);
+}, [candidatesPage])
+return(
+
+
+
+       
+          
         <div className="container text-center mt-3 py-20">
+          {candidatesPage.map(product => {
+             return (
            <div class="w-full ml-20">
             <h1 class="text-blue-800">Candidate</h1>
           <div class="mx-auto w-full">
@@ -90,8 +96,11 @@ const UsersPage = () => {
             <div class="mt-5">
               <button className='w-44 h-14 bg-blue-800 border-none rounded-xl text-xl text-blue-300'>Send Message</button>
             </div>
+       
             </div>
+               ) })}
             </div>
-        )
-  };
+            
+       
+  )};
 export default UsersPage;
